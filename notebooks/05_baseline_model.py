@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, roc_auc_score
 from sklearn.preprocessing import StandardScaler
+import joblib
 
 X_train = pd.read_csv("../data/X_train.csv")
 X_test = pd.read_csv("../data/X_test.csv")
@@ -20,3 +21,7 @@ y_proba = log_reg.predict_proba(X_test_scaled)[:, 1]
 
 print(classification_report(y_test, y_pred))
 print("ROC-AUC:", roc_auc_score(y_test, y_proba))
+
+joblib.dump(log_reg, "../outputs/logreg_model.pkl")
+joblib.dump(scaler, "../outputs/scaler.pkl")
+print("Saved logistic regression model + scaler")

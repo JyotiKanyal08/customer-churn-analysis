@@ -54,6 +54,9 @@ Customer churn — when a customer stops using a company's product or service �
 - **Electronic check payers churn at 45.3%** — nearly 3x the rate of customers on automatic payment methods (15–19%).
 - **Churned customers have far shorter tenure** (~18 months average) compared to retained customers (~37.6 months).
 
+### Visual Overview
+
+![EDA Overview](outputs/eda_overview.png)
 ---
 
 ## Model Comparison
@@ -76,6 +79,10 @@ SHAP was used to move beyond a black-box prediction and identify *why* the model
 
 - **Global drivers:** contract type (especially two-year contracts, which strongly reduce churn risk), tenure, fiber optic internet, and electronic check payment method are the top predictors.
 - **Individual explanations:** each customer's dashboard prediction includes a waterfall chart showing exactly which features pushed their risk score up or down — useful for a retention team deciding how to act on a specific case.
+
+### Global Feature Importance
+
+![SHAP Summary](outputs/shap_summary.png)
 
 ---
 

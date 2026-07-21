@@ -5,16 +5,19 @@ import joblib
 import shap
 import matplotlib.pyplot as plt
 from sklearn.metrics import classification_report, roc_auc_score, roc_curve
+import os
 
 st.set_page_config(page_title="Customer Churn Risk Dashboard", layout="wide")
 st.title("📉 Customer Churn Risk Dashboard")
 
-xgb = joblib.load("../outputs/xgb_model.pkl")
-log_reg = joblib.load("../outputs/logreg_model.pkl")
-scaler = joblib.load("../outputs/scaler.pkl")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-X_test = pd.read_csv("../data/X_test.csv")
-y_test = pd.read_csv("../data/y_test.csv").squeeze()
+xgb = joblib.load(os.path.join(BASE_DIR, "..", "outputs", "xgb_model.pkl"))
+log_reg = joblib.load(os.path.join(BASE_DIR, "..", "outputs", "logreg_model.pkl"))
+scaler = joblib.load(os.path.join(BASE_DIR, "..", "outputs", "scaler.pkl"))
+
+X_test = pd.read_csv(os.path.join(BASE_DIR, "..", "data", "X_test.csv"))
+y_test = pd.read_csv(os.path.join(BASE_DIR, "..", "data", "y_test.csv")).squeeze()
 
 xgb_probs = xgb.predict_proba(X_test)[:, 1]
 logreg_probs = log_reg.predict_proba(scaler.transform(X_test))[:, 1]
